@@ -12,6 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.telusko.demo.bootjpa.dao.AlienRepo;
 import com.telusko.demo.bootjpa.model.Alien;
 
+import java.util.List;
+import java.util.Optional;
+
 
 @Controller
 public class AlienController {
@@ -45,14 +48,15 @@ public class AlienController {
 
     @RequestMapping("aliens")
     @ResponseBody //this annotation will return the data as it is without looking for any view name
-    public String getAliens(){
-        return repo.findAll().toString();
+    public List<Alien> getAliens(){
+        //jackson-core automatically converts java object into Json when we return data from controller
+        return repo.findAll();
     }
 
     @RequestMapping("alien/{aid}")
     @ResponseBody //this annotation will return the data as it is without looking for any view name
-    public String getAliens(@PathVariable("aid") int aid){
-        return repo.findById(aid).toString();
+    public Optional<Alien> getAliens(@PathVariable("aid") int aid){
+        return repo.findById(aid);
     }
 
 
