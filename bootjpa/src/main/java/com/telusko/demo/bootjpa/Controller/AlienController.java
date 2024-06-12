@@ -46,7 +46,9 @@ public class AlienController {
 //        return mv;
 //    }
 
-    @RequestMapping("aliens")
+    //produces will restrict the data to be returned only in the format mentioned
+    //@RequestMapping(value = "aliens",produces = {"application/xml"})
+    @RequestMapping(value = "aliens")
     @ResponseBody //this annotation will return the data as it is without looking for any view name
     public List<Alien> getAliens(){
         //jackson-core automatically converts java object into Json when we return data from controller
