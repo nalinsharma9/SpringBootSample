@@ -30,7 +30,7 @@ public class AlienController {
     @Autowired
     AlienRepo repo;
 
-    @RequestMapping("/")
+    @RequestMapping(path="/")
     public String home(){
         return "home.jsp";
     }
@@ -54,7 +54,7 @@ public class AlienController {
 //        return mv;
 //    }
 
-    @PostMapping("/alien")
+    @PostMapping(path="/alien")
     //@RequestBody annotation will convert the incoming json data into java object by deserialization
     public Alien addAlien(@RequestBody Alien alien){
         repo.save(alien);
@@ -64,14 +64,14 @@ public class AlienController {
 
     //produces will restrict the data to be returned only in the format mentioned
     //@GetMapping(value = "aliens",produces = {"application/xml"})
-    @GetMapping(value = "aliens")
+    @GetMapping(path = "aliens")
 //    @ResponseBody //this annotation will return the data as it is without looking for any view name
     public List<Alien> getAliens(){
         //jackson-core automatically converts java object into Json when we return data from controller
         return repo.findAll();
     }
 
-    @GetMapping("alien/{aid}")
+    @GetMapping(path="alien/{aid}")
 //    @ResponseBody //this annotation will return the data as it is without looking for any view name
     public Optional<Alien> getAliens(@PathVariable("aid") int aid){
         return repo.findById(aid);
