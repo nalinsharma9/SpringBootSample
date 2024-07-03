@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -61,6 +62,12 @@ public class AlienController {
         return alien;
     }
 
+    @PutMapping(path="/alien")
+    public Alien saveOrUpdateAlien(@RequestBody Alien alien){
+        repo.save(alien);
+        return alien;
+    }
+
 
     //produces will restrict the data to be returned only in the format mentioned
     //@GetMapping(value = "aliens",produces = {"application/xml"})
@@ -76,6 +83,14 @@ public class AlienController {
     public Optional<Alien> getAliens(@PathVariable("aid") int aid){
         return repo.findById(aid);
     }
+
+    @DeleteMapping(path="alien/{aid}")
+    public String deleteAlien(@PathVariable("aid") int aid){
+        Alien a = repo.getOne(aid);
+        repo.delete(a);
+        return "Deleted "+aid;
+    }
+
 
 
 }
