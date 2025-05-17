@@ -3,10 +3,12 @@ package com.telusko.demo.bootjpa.Service;
 import com.telusko.demo.bootjpa.dao.StudentRepo;
 import com.telusko.demo.bootjpa.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Locale;
 import java.util.Optional;
 
+@Service
 public class StudentService {
     @Autowired
     StudentRepo repo;
